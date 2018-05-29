@@ -1,8 +1,7 @@
 //
 //  main.c
-//  One-time Pad
+//  main
 //
-//  Created by Juan Suarez, Romel Martínez & Bruno Maglioni on 1/17/18.
 //
 
 #include <stdio.h>
@@ -24,8 +23,28 @@ int main(int argc, const char * argv[]) {
                 printf("Escriba el texto que desea cifrar: \n");
                 gets(arr1);
                 int tam = strlen(arr1);
+                
+                
                 printf("Escriba la llave para cifrar: \n");
                 gets(arr2);
+                
+                int perm = strlen(arr2);
+                if(perm%2 == 0){
+                    
+                    for( int i = 0; i < (perm/2); i++){
+                        char temp = arr2[i];
+                        arr2[i] = arr2[perm - i - 1];
+                        arr2[perm - i - 1] = temp;
+                    }
+                }else{
+                    for( int i = 0; i < ((perm - 1) / 2); i++){
+                        char temp = arr2[i];
+                        arr2[i] = arr2[perm - i - 1];
+                        arr2[perm - i - 1] = temp;
+                    }
+                    
+                }
+                
                 int cam = 0;
                 while(cam < tam) {
                     arr2[cam] = toupper(arr2[cam]);
@@ -51,6 +70,24 @@ int main(int argc, const char * argv[]) {
                 int tam2 = strlen(arr1);
                 printf("Escriba la llave para cifrar: \n");
                 gets(arr2);
+                
+                int perm2 = strlen(arr2);
+                if(perm2%2 == 0){
+                    
+                    for( int i = 0; i < (perm2/2); i++){
+                        char temp = arr2[i];
+                        arr2[i] = arr2[perm2 - i - 1];
+                        arr2[perm2 - i - 1] = temp;
+                    }
+                }else{
+                    for( int i = 0; i < ((perm - 1) / 2); i++){
+                        char temp = arr2[i];
+                        arr2[i] = arr2[perm - i - 1];
+                        arr2[perm - i - 1] = temp;
+                    }
+                    
+                }
+                
                 int cam2 = 0;
                 while(cam2 < tam) {
                     arr2[cam2] = toupper(arr2[cam2]);
