@@ -16,89 +16,121 @@ int main(int argc, const char * argv[]) {
     char arr3[50];
     
     while (x == 1) {
+    	/*Menu de Inicio*/
         printf("¿Desea usted hacer?\n\t1) Cifrar\n\t2) Decifrar\n\t3) Salir\n");
         scanf("%d%*c", &seleccion);
         switch (seleccion) {
+
+        	/*Cifrar*/
             case 1:
+
+            	/*Texto a Cifrar*/
                 printf("Escriba el texto que desea cifrar: \n");
                 gets(arr1);
                 int tam = strlen(arr1);
-                
-                
-                printf("Escriba la llave para cifrar: \n");
-                gets(arr2);
-                
-                int perm = strlen(arr2);
-                if(perm%2 == 0){
-                    
-                    for( int i = 0; i < (perm/2); i++){
-                        char temp = arr2[i];
-                        arr2[i] = arr2[perm - i - 1];
-                        arr2[perm - i - 1] = temp;
-                    }
-                }else{
-                    for( int i = 0; i < ((perm - 1) / 2); i++){
-                        char temp = arr2[i];
-                        arr2[i] = arr2[perm - i - 1];
-                        arr2[perm - i - 1] = temp;
-                    }
-                    
+
+                if (tam > 20) {
+                	printf("Las especificaciones requieren que el mensaje sea de máximo 20 caracteres");
+                	break;
+                }
+
+                int cam = 0;
+                while(cam < tam) {
+                    arr1[cam] = toupper(arr1[cam]);
+                    cam++;
                 }
                 
-                int cam = 0;
+                /*Llave de Cifrado*/
+                printf("Escriba la llave para cifrar: \n");
+                gets(arr2);
+                int perm = strlen(arr2);
+
+                if (perm > 10) {
+                	printf("Las especificaciones requieren que la llave sea de máximo 10 caracteres");
+                	break;
+                }
+                
+                cam = 0;
+                while(cam < perm) {
+                    arr2[cam] = toupper(arr2[cam]);
+                    cam++;
+                }
+
+                int ex = 0;
+                while (ex < tam ) {
+                	if (arr1[ex] == 32) {
+                		arr3[ex] = arr1[ex];
+                		printf("\n");
+                		ex++;
+                	}else if (arr1[ex] >= 48 && arr1[ex] <= 57) {
+                		arr3[ex] = ((arr2[ex]-65) + (arr1[ex]-48))%10;
+	                    arr3[ex] = arr3[ex]+48;
+	                    printf("\n%c + %c -> %c", arr1[ex], arr2[ex], arr3[ex]);
+	                    ex++;
+                	}else{
+	                    arr3[ex] = ((arr2[ex]-65) + (arr1[ex]-65))%26;
+	                    arr3[ex] = arr3[ex]+65;
+	                    printf("\n%c + %c -> %c", arr1[ex], arr2[ex], arr3[ex]);
+	                    ex++;
+	                }
+                }
+                printf("\n");
+                break;
+
+            /*Descifrar*/
+            case 2:
+
+            	/*Texto a Descifrar*/
+                printf("Escriba el texto cifrado: \n");
+                gets(arr1);
+                tam = strlen(arr1);
+
+                if (tam > 20) {
+                	printf("Las especificaciones requieren que el mensaje sea de máximo 20 caracteres");
+                	break;
+                }
+
+                cam = 0;
+                while(cam < tam) {
+                    arr1[cam] = toupper(arr1[cam]);
+                    cam++;
+                }
+
+                /*Llave de Descifrado*/
+                printf("Escriba la llave para descifrar: \n");
+                gets(arr2);
+                
+                perm = strlen(arr2);
+
+                if (perm > 10) {
+                	printf("Las especificaciones requieren que la llave sea de máximo 10 caracteres");
+                	break;
+                }
+                
+                cam = 0;
                 while(cam < tam) {
                     arr2[cam] = toupper(arr2[cam]);
                     cam++;
                 }
-                int ex = 0;
+
+                ex = 0;
+
                 while (ex < tam ) {
-                    arr3[ex] = ((arr2[ex]-65) + (arr1[ex]-97))%26;
-                    arr3[ex] = arr3[ex]+65;
-                    printf("\n%c + %c -> %c", arr1[ex], arr2[ex], arr3[ex]);
-                    ex++;
-                }
-                printf("\n");
-                break;
-            case 2:
-                printf("Escriba el texto cifrado: \n");
-                gets(arr1);
-                int cam3 = 0;
-                while(cam3 < tam) {
-                    arr2[cam3] = toupper(arr2[cam3]);
-                    cam3++;
-                }
-                int tam2 = strlen(arr1);
-                printf("Escriba la llave para cifrar: \n");
-                gets(arr2);
-                
-                int perm2 = strlen(arr2);
-                if(perm2%2 == 0){
-                    
-                    for( int i = 0; i < (perm2/2); i++){
-                        char temp = arr2[i];
-                        arr2[i] = arr2[perm2 - i - 1];
-                        arr2[perm2 - i - 1] = temp;
-                    }
-                }else{
-                    for( int i = 0; i < ((perm - 1) / 2); i++){
-                        char temp = arr2[i];
-                        arr2[i] = arr2[perm - i - 1];
-                        arr2[perm - i - 1] = temp;
-                    }
-                    
-                }
-                
-                int cam2 = 0;
-                while(cam2 < tam) {
-                    arr2[cam2] = toupper(arr2[cam2]);
-                    cam2++;
-                }
-                int ex2 = 0;
-                while (ex2 < tam2) {
-                    arr3[ex2] = ((arr1[ex2]-65 + 26) - (arr2[ex2] - 65))%26;
-                    arr3[ex2] = arr3[ex2]+97;
-                    printf("\n%c + %c -> %c", arr1[ex2], arr2[ex2], arr3[ex2]);
-                    ex2++;
+                	if (arr1[ex] == 32) {
+                		arr3[ex] = arr1[ex];
+                		printf("\n");
+                		ex++;
+                	}else if (arr1[ex] >= 48 && arr1[ex] <= 57) {
+                		arr3[ex] = ((arr1[ex]-48+10) - (arr2[ex]-65))%10;
+	                    arr3[ex] = arr3[ex]+48;
+	                    printf("\n%c + %c -> %c", arr1[ex], arr2[ex], arr3[ex]);
+	                    ex++;
+                	}else{
+	                    arr3[ex] = ((arr1[ex]-65+26) - (arr2[ex]-65))%26;
+	                    arr3[ex] = arr3[ex]+65;
+	                    printf("\n%c + %c -> %c", arr1[ex], arr2[ex], arr3[ex]);
+	                    ex++;
+	                }
                 }
                 printf("\n");
                 break;
@@ -111,3 +143,22 @@ int main(int argc, const char * argv[]) {
     }
     return 0;
 }
+
+
+/*
+if(perm2%2 == 0){
+                    
+    for( int i = 0; i < (perm2/2); i++){
+        char temp = arr2[i];
+        arr2[i] = arr2[perm2 - i - 1];
+        arr2[perm2 - i - 1] = temp;
+    }
+}else{
+    for( int i = 0; i < ((perm - 1) / 2); i++){
+        char temp = arr2[i];
+        arr2[i] = arr2[perm - i - 1];
+        arr2[perm - i - 1] = temp;
+    }
+    
+}
+*/
