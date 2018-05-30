@@ -1,15 +1,10 @@
-//
-//  main.c
-//  main
-//
-//
-
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
 
 int main(int argc, const char * argv[]) {
     int seleccion;
+    int ex, ex2, cam, tam;
     int x = 1;
     char arr1[50];
     char arr2[50];
@@ -27,14 +22,14 @@ int main(int argc, const char * argv[]) {
             	/*Texto a Cifrar*/
                 printf("Escriba el texto que desea cifrar: \n");
                 gets(arr1);
-                int tam = strlen(arr1);
+                tam = strlen(arr1);
 
                 if (tam > 20) {
                 	printf("Las especificaciones requieren que el mensaje sea de máximo 20 caracteres");
                 	break;
                 }
 
-                int cam = 0;
+                cam = 0;
                 while(cam < tam) {
                     arr1[cam] = toupper(arr1[cam]);
                     cam++;
@@ -56,22 +51,29 @@ int main(int argc, const char * argv[]) {
                     cam++;
                 }
 
-                int ex = 0;
+                ex = 0;
+                ex2 = 0;
                 while (ex < tam ) {
+                	if (ex2 > perm) {
+                		ex2 = 0;
+                	}
                 	if (arr1[ex] == 32) {
                 		arr3[ex] = arr1[ex];
                 		printf("\n");
                 		ex++;
+                		ex2++;
                 	}else if (arr1[ex] >= 48 && arr1[ex] <= 57) {
-                		arr3[ex] = ((arr2[ex]-65) + (arr1[ex]-48))%10;
+                		arr3[ex] = abs(((arr2[ex2]-65) + (arr1[ex]-48)))%10;
 	                    arr3[ex] = arr3[ex]+48;
-	                    printf("\n%c + %c -> %c", arr1[ex], arr2[ex], arr3[ex]);
+	                    printf("\n%c + %c -> %c", arr1[ex], arr2[ex2], arr3[ex]);
 	                    ex++;
+	                    ex2++;
                 	}else{
-	                    arr3[ex] = ((arr2[ex]-65) + (arr1[ex]-65))%26;
+	                    arr3[ex] = abs(((arr2[ex2]-65) + (arr1[ex]-65)))%26;
 	                    arr3[ex] = arr3[ex]+65;
-	                    printf("\n%c + %c -> %c", arr1[ex], arr2[ex], arr3[ex]);
+	                    printf("\n%c + %c -> %c", arr1[ex], arr2[ex2], arr3[ex]);
 	                    ex++;
+	                    ex2++;
 	                }
                 }
                 printf("\n");
@@ -114,22 +116,28 @@ int main(int argc, const char * argv[]) {
                 }
 
                 ex = 0;
-
+                ex2 = 0;
                 while (ex < tam ) {
+                	if (ex2 > perm) {
+                		ex2 = 0;
+                	}
                 	if (arr1[ex] == 32) {
                 		arr3[ex] = arr1[ex];
                 		printf("\n");
                 		ex++;
+                		ex2++;
                 	}else if (arr1[ex] >= 48 && arr1[ex] <= 57) {
-                		arr3[ex] = ((arr1[ex]-48+10) - (arr2[ex]-65))%10;
+                		arr3[ex] = abs(((arr1[ex]-48+10) - (arr2[ex2]-65)))%10;
 	                    arr3[ex] = arr3[ex]+48;
-	                    printf("\n%c + %c -> %c", arr1[ex], arr2[ex], arr3[ex]);
+	                    printf("\n%c + %c -> %c", arr1[ex], arr2[ex2], arr3[ex]);
 	                    ex++;
+	                    ex2++;
                 	}else{
-	                    arr3[ex] = ((arr1[ex]-65+26) - (arr2[ex]-65))%26;
+	                    arr3[ex] = abs(((arr1[ex]-65+26) - (arr2[ex2]-65)))%26;
 	                    arr3[ex] = arr3[ex]+65;
-	                    printf("\n%c + %c -> %c", arr1[ex], arr2[ex], arr3[ex]);
+	                    printf("\n%c + %c -> %c", arr1[ex], arr2[ex2], arr3[ex]);
 	                    ex++;
+	                    ex2++;
 	                }
                 }
                 printf("\n");
