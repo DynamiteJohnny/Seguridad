@@ -51,6 +51,8 @@ int main(int argc, const char * argv[]) {
                     cam++;
                 }
 
+                printf("One-time-pad:\n");
+
                 ex = 0;
                 ex2 = 0;
                 while (ex < tam ) {
@@ -76,6 +78,15 @@ int main(int argc, const char * argv[]) {
 	                }
                 }
 
+                printf("\n");
+
+                cam = 0;
+                while(cam < tam) {
+                    printf("%c",arr3[cam]);
+                    cam++;
+                }
+                printf("\n");
+
                 if(tam%2 == 0){      
 				    for( int i = 0; i < (tam/2); i++){
 				        char temp = arr3[i];
@@ -91,8 +102,17 @@ int main(int argc, const char * argv[]) {
 				    
 				}
 
+				printf("Invertir:\n");
 
+				cam = 0;
+                while(cam < tam) {
+                    printf("%c",arr3[cam]);
+                    cam++;
+                }
+                printf("\n");
 				     
+
+                printf("Caesar:\n");
 
 			    for(int i = 0; i < tam; i++){ 
 			        for(int j = 0;j < 3;j++){ 
@@ -105,10 +125,7 @@ int main(int argc, const char * argv[]) {
 
 			    } 
 
-				
-				printf("\n");
-
-                printf("\nEl texto cifrado es:");
+                printf("El texto cifrado es:\t");
 
                 cam = 0;
                 while(cam < tam) {
@@ -156,6 +173,8 @@ int main(int argc, const char * argv[]) {
                     cam++;
                 }
 
+                printf("Caesar:\n");
+
 			    for(int i = 0;i < tam ;i++){ 
 			        for(int j = 0;j < 3;j++){ 
 			            if(arr1[i]>65 && arr1[i]<=90){ 
@@ -165,6 +184,15 @@ int main(int argc, const char * argv[]) {
 			            }
 			        } 
 			    }
+
+			    cam = 0;
+                while(cam < tam) {
+                    printf("%c",arr1[cam]);
+                    cam++;
+                }
+                printf("\n");
+
+                printf("Invertir:\n");
 
                 if(tam%2 == 0){      
 				    for( int i = 0; i < (tam/2); i++){
@@ -180,6 +208,15 @@ int main(int argc, const char * argv[]) {
 				    }
 				    
 				}
+
+				printf("One-time-pad:");
+
+				cam = 0;
+                while(cam < tam) {
+                    printf("%c",arr1[cam]);
+                    cam++;
+                }
+                printf("\n");
 
                 ex = 0;
                 ex2 = 0;
@@ -207,7 +244,7 @@ int main(int argc, const char * argv[]) {
                 }
                 printf("\n");
 
-                printf("\nEl texto cifrado es:");
+                printf("\nEl texto descifrado es:\t");
 
                 cam = 0;
                 while(cam < tam) {
